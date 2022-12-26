@@ -1,0 +1,41 @@
+𝗘͟𝗻͟𝗱͟-͟𝗼͟𝗳͟-͟𝘁͟𝗿͟𝗮͟𝗶͟𝗻͟𝗶͟𝗻͟𝗴 𝗽͟𝗿͟𝗼͟𝗷͟𝗲͟𝗰͟𝘁 𝘀͟𝗽͟𝗲͟𝗰͟𝗶͟𝗳͟𝗶͟𝗰͟𝗮͟𝘁͟𝗶͟𝗼͟𝗻
+
+1.𝗢͟𝗯͟𝗷͟𝗲͟𝗰͟𝘁͟𝗶͟𝘃͟𝗲 𝗼͟𝗳 𝘁͟𝗵͟𝗲 𝗽͟𝗿͟𝗼͟𝗷͟𝗲͟𝗰͟𝘁͟:
+
+This project aims to develop an e-commerce web application
+
+2.𝗠͟𝗮͟𝗶͟𝗻 𝗳͟𝗲͟𝗮͟𝘁͟𝘂͟𝗿͟𝗲͟:
+
+A simple user can:
+
+*Browse the list of properties for sale
+*search for specific goods (by name, price, category)
+*create an account and log in to the app
+*edit account info
+*add goods to your order list (basket)
+
+The administrator will be able to:
+*log in with username and password
+*access the dashboard
+*update the list of goods (adding new items and/or deleting)
+
+
+3.𝗧͟𝗲͟𝗰͟𝗵͟𝗻͟𝗼͟𝗹͟𝗼͟𝗴͟𝗶͟𝗲͟𝘀 𝘂͟𝘀͟𝗲͟𝗱͟:
+
+-User interface:
+*HTML
+*CSS (with the Bootstrap framework)
+*JavaScript (with React JS library)
+*React Icons for icons
+
+-API:
+*Platzi Fake Store API (product list and admin account)
+
+- Management of HTTP requests:
+*Axios
+
+-Management of the global state:
+*Redux
+
+- URL management:
+*React Router
