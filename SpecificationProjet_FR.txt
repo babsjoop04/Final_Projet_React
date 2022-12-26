@@ -13,6 +13,7 @@ Un utilisateur simple pourra :
 *creer un compte et se connecter sur l'application 
 *modifier les infos de son compte
 *ajouter des biens à sa liste (panier) de commande
+*modifier sa liste de commande
 
 L'administrateur pourra:
 *se connecter avec son identifiant et son mot de passe

@@ -12,7 +12,8 @@ A simple user can:
 *search for specific goods (by name, price, category)
 *create an account and log in to the app
 *edit account info
-*add goods to your order list (basket)
+*add goods to your order list
+*edit own order list
 
 The administrator will be able to:
 *log in with username and password
