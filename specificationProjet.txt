@@ -2,20 +2,22 @@
 
 1.𝗢͟𝗯͟𝗷͟𝗲͟𝗰͟𝘁͟𝗶͟𝗳 𝗱͟𝘂 𝗽͟𝗿͟𝗼͟𝗷͟𝗲͟𝘁͟:
 
-Ce projet vise à développer d'une application web de e-commerce
+Ce projet vise à développer une application web de e-commerce
 
 2.𝗙͟𝗼͟𝗻͟𝗰͟𝘁͟𝗶͟𝗼͟𝗻͟𝗻͟𝗮͟𝗹͟𝗶͟𝘁͟é͟𝘀 𝗽͟𝗿͟𝗶͟𝗻͟𝗰͟𝗶͟𝗽͟𝗮͟𝗹͟𝗲͟𝘀͟:
 
 Un utilisateur simple pourra :
 
 *Parcourir la liste des biens en vente
-*creer un compte et se connecter sur l'application 
 *rechercher une marchandise présise (par son nom,par son prix,par sa catégorie)
+*creer un compte et se connecter sur l'application 
+*modifier les infos de son compte
 *ajouter des biens à sa liste (panier) de commande
 
-Un administrateur pourra:
+L'administrateur pourra:
 *se connecter avec son identifiant et son mot de passe
-*mettre à jour la liste des marchandises (ajout et/ou suppression des nouveaux éléments)
+*acceder au dashboard
+*mettre à jour la liste des marchandises (ajout de nouveaux éléments et/ou suppression )
 
 
 3.𝗧͟𝗲͟𝗰͟𝗵͟𝗻͟𝗼͟𝗹͟𝗼͟𝗴͟𝗶͟𝗲͟𝘀 𝘂͟𝘁͟𝗶͟𝗹͟𝗶͟𝘀͟é͟𝗲͟𝘀͟:
@@ -24,11 +26,13 @@ Un administrateur pourra:
 *HTML
 *CSS(avec le framework Bootstrap)
 *JavaScript (avec la bibliotheque React JS) 
--Icone:
-
-*React Icons
+*React Icons pour les icones
 
 -API:
+*Platzi Fake Store API (liste des produits et administrateur)
+
+-Gestion des requetes HTTP:
+*Axios
 
 -Gestion de l'etat global:
 *Redux
