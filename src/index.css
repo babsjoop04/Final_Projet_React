@@ -3,10 +3,9 @@
 */
 #MyLogoHeader,
 #MyLogoFooter {
-  width: 70px;
+  width: 100px;
 }
 #Header {
-  border: 1px solid black;
   background: #078fcd;
   background: -webkit-linear-gradient(to right, #91eae4, #7f7fd5);
   background: linear-gradient(to right, #91eae4, #078fcd);

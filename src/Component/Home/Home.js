@@ -5,11 +5,12 @@ import { VscCircleFilled } from "react-icons/vsc"
 const Home = () => {
     return (
         <>
+
             <Header />
 
             <div className="container-fluid pt-3 pb-5 d-flex justify-content-between" id="BodyOfHome">
                 <div className="py-3" id="filterForm">
-                    <h2>Filter merchandise on sale</h2>
+                    <h2 id="titleFilter">Filter merchandise on sale</h2>
                     <h3>
                         <VscCircleFilled />
                         Categories
@@ -40,7 +41,7 @@ const Home = () => {
                         <button className="btn btn-primary btn-sm">Filter</button>
                     </div>
                 </div>
-                <div className="d-flex justify-content-between">
+                <div className="container d-flex justify-content-between">
                     (sert affichage des biens)
                 </div>
             </div>
