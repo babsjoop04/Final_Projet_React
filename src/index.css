@@ -1,11 +1,34 @@
 /*
- Header style
+ Header and Footer style 
 */
-#MyLogo {
-  width: 60px;
-  height: 55px;
+#MyLogoHeader,
+#MyLogoFooter {
+  width: 70px;
 }
 #Header {
-  /* position: */
+  border: 1px solid black;
+  background: #078fcd;
+  background: -webkit-linear-gradient(to right, #91eae4, #7f7fd5);
+  background: linear-gradient(to right, #91eae4, #078fcd);
+}
+
+#Footer {
+  color: #ffffff;
+}
+
+#HeaderOfFooter,
+#footerOfFooter {
+  background-color: #282828;
+}
+
+#bodyOfFooter {
+  background-color: #323232;
+}
+
+/* 
+Home style
+*/
+
+#filterForm {
   border: 1px solid black;
 }
