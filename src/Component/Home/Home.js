@@ -1,16 +1,16 @@
 import Footer from "../HeaderAndFooter/Footer";
 import Header from "../HeaderAndFooter/Header";
+import MerchandiseCardHome from "../MerchandiseComp/MerchandiseCardHome";
 import { VscCircleFilled } from "react-icons/vsc"
 
 const Home = () => {
     return (
         <>
-
             <Header />
 
-            <div className="container-fluid pt-3 pb-5 d-flex justify-content-between" id="BodyOfHome">
+            <div className=" pt-3 pb-5 d-flex justify-content-between" id="BodyOfHome">
                 <div className="py-3" id="filterForm">
-                    <h2 id="titleFilter">Filter merchandise on sale</h2>
+                    <h2 id="titleFilter">Filter</h2>
                     <h3>
                         <VscCircleFilled />
                         Categories
@@ -41,8 +41,13 @@ const Home = () => {
                         <button className="btn btn-primary btn-sm">Filter</button>
                     </div>
                 </div>
-                <div className="container d-flex justify-content-between">
-                    (sert affichage des biens)
+                <div className="container-fluid">
+                    <div className="row d-flex justify-content-around" id="viewMarchandise">
+                        {/* (sert affichage des biens) */}
+                        <MerchandiseCardHome />
+                        <MerchandiseCardHome />
+
+                    </div>
                 </div>
             </div>
 

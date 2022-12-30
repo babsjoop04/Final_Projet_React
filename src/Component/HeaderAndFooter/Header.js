@@ -9,10 +9,10 @@ const Header = () => {
             </div>
             <div className="container-fluid text-center" id="Header">
                 <div className="row">
-                    <div className="mt-1 col-2 col-sm-2 col-lg-2  col-xl col-xxl">
+                    <div className="mt-3 col-2 col-sm-2 col-lg-2  col-xl col-xxl">
                         <img src={"/img/Logo/LogoKayyDieund2-removebg-preview2.png"} id="MyLogoHeader" alt="MyLogo" />
                     </div>
-                    <div className="col-5 col-sm-5 col-lg-5 col-xl-5 col-xxl-5 mt-2">
+                    <div className="col-5 col-sm-5 col-lg-5 col-xl-5 col-xxl-5 mt-4">
                         <div className="row">
                             <div className="col input-group ">
                                 <span className="input-group-text">
@@ -52,7 +52,7 @@ const Header = () => {
                                         </button>
                                     </div>
                                     <div className="col col-sm col-lg col-xl col-xxl">
-                                        <button className="btn btn-sm mt-3 btn-primary" id="loginButton">
+                                        <button className="btn mt-3 btn-primary" id="loginButton">
                                             Login
                                         </button>
                                     </div>
