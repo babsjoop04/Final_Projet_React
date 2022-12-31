@@ -1,17 +1,23 @@
+/* 
+Logo
+*/
+#MyLogoHeader,
+#MyLogoFooter,
+#MyLogoLogIn {
+  width: 100px;
+}
+
 /*
  Header and Footer style 
 */
-#MyLogoHeader,
-#MyLogoFooter {
-  width: 100px;
-}
 #Header {
-  background: #078fcd;
+  background: #91eae4;
   background: -webkit-linear-gradient(to right, #91eae4, #7f7fd5);
   background: linear-gradient(to right, #91eae4, #078fcd);
 }
 
-#Footer {
+#Footer,
+#loginPage {
   color: #ffffff;
 }
 
@@ -44,4 +50,13 @@ Merchandise card
   border-radius: 7px;
   background: linear-gradient(225deg, #e6e6e6, #ffffff);
   box-shadow: -10px 10px 22px #8c8c8c, 10px -10px 22px #ffffff;
+}
+
+/* 
+SignIn 
+*/
+
+#loginPage {
+  background-color: #91eae4;
+  background: linear-gradient(to left, #91eae4, #078fcd);
 }
