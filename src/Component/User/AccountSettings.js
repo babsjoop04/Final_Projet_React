@@ -11,7 +11,6 @@ const AccountSettings = () => {
                     <legend>
                         Personal information
                     </legend>
-                    <p></p>
                 </fieldset>
 
 
