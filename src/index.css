@@ -45,15 +45,18 @@ Home style
 
 /* 
 Merchandise card
+MerchandiseDesc
+
 */
-.merchandiseCard:hover {
+.merchandiseCard:hover,
+.imgProduct:hover {
   border-radius: 7px;
   background: linear-gradient(225deg, #e6e6e6, #ffffff);
   box-shadow: -10px 10px 22px #8c8c8c, 10px -10px 22px #ffffff;
 }
 
 /* 
-SignIn 
+loginPage 
 */
 
 #loginPage {

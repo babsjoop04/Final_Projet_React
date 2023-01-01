@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 
@@ -7,19 +7,17 @@ const LogInPage = () => {
   const [message1, changeMessage1] = useState("Don't have an account");
   const [message2, changeMessage2] = useState("sign up");
 
-  useEffect(() => {
-    document
-      .getElementById("buttonChangeForm")
-      .addEventListener("click", () => {
-        setHaveAccount(!haveAccount);
-        message1 === "Don't have an account"
-          ? changeMessage1("Already have an account")
-          : changeMessage1("Don't have an account");
-        message2 === "sign up"
-          ? changeMessage2("sign in")
-          : changeMessage2("sign up");
-      });
-  });
+
+  const SwitchForm = () => {
+    setHaveAccount(!haveAccount);
+    message1 === "Don't have an account"
+      ? changeMessage1("Already have an account")
+      : changeMessage1("Don't have an account");
+    message2 === "sign up"
+      ? changeMessage2("sign in")
+      : changeMessage2("sign up");
+  }
+
 
   return (
     <div className="container-fluid text-center py-5" id="loginPage">
@@ -49,7 +47,7 @@ const LogInPage = () => {
           <div className="row my-3">
             <div className="col col-sm col-md col-lg col-xl col-xxl">
               {message1},
-              <button className="btn btn-link" id="buttonChangeForm">
+              <button className="btn btn-link" id="buttonChangeForm" onClick={SwitchForm}>
                 {message2}
               </button>
             </div>

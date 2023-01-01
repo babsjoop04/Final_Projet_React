@@ -1,12 +1,16 @@
-import Home from "./Component/Home/Home";
-import LogInPage from "./Component/LoginPage/LogInPage";
+// import Home from "./Component/Home/Home";
+// import LogInPage from "./Component/LoginPage/LogInPage";
+// import MerchandiseDesc from "./Component/MerchandiseComp/MerchandiseDesc";
+import AccountSettings from "./Component/User/AccountSettings";
 
 function App() {
   return (
     <>
 
       {/* <Home /> */}
-      <LogInPage />
+      {/* <LogInPage /> */}
+      {/* <AccountSettings /> */}
+      <AccountSettings />
 
     </>
   );
