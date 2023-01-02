@@ -9,7 +9,6 @@ function App() {
 
       {/* <Home /> */}
       {/* <LogInPage /> */}
-      {/* <AccountSettings /> */}
       <AccountSettings />
 
     </>

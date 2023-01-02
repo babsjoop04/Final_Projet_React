@@ -1,6 +1,6 @@
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook, BsApple } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const SignUp = () => {
   const [classAlert, changeClass] = useState("");
@@ -92,7 +92,7 @@ const SignUp = () => {
               type="email"
               className="form-control"
               placeholder="example@example.com"
-              autoComplete="email"
+              id="email"
             />
           </div>
 
@@ -102,7 +102,7 @@ const SignUp = () => {
               type="text"
               className="form-control"
               placeholder="your username"
-              autoComplete="username"
+              id="userName"
             />
           </div>
           <div className="input-group  mb-3">
