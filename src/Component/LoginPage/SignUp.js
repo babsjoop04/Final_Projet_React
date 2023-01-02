@@ -129,13 +129,13 @@ const SignUp = () => {
             <strong className={classAlert}>{message}</strong>
           </div>
         </fieldset>
+      </form>
         <button
-          className="btn submit btn-outline-primary mt-2"
+          className="btn btn-outline-primary mt-2"
           id="createAccountBtn"
         >
           Create
         </button>
-      </form>
       <div className="row">
         <div className="col col-sm col-md col-lg col-xl col-xxl">
           <div className=" btn-group mt-3">
