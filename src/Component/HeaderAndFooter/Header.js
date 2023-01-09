@@ -1,10 +1,36 @@
 import { FaUserAlt, FaShoppingCart, FaSearch } from "react-icons/fa"
 import { AiFillDashboard } from "react-icons/ai"
 import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
+import createSearch from "../../Redux/Actions/createSearch";
 
-const Header = () => {
+const mapStateToProps = ({ userIsLoggedIn, userIsAdmin }) => {
+    return {
+        userIsLoggedIn: userIsLoggedIn,
+        userIsAdmin: userIsAdmin
+    }
+
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchSearch: (payload) => dispatch(createSearch(payload))
+
+    }
+}
+
+const Header = ({ userIsLoggedIn, userIsAdmin, dispatchSearch }) => {
 
     const changeUrl = useNavigate()
+
+    const Search = () => {
+        const searchInputValue = document.getElementById("searchInput").value
+        dispatchSearch({
+            searchInputValue: searchInputValue
+        })
+        changeUrl("/")
+
+    }
 
     return (
         <>
@@ -24,16 +50,16 @@ const Header = () => {
                                 <span className="input-group-text">
                                     <FaSearch />
                                 </span>
-                                <input type="text" className="form-control" placeholder="Search" />
-                                <button className="btn btn-primary">Search</button>
+                                <input type="text" className="form-control" placeholder="Search product or category" id="searchInput" />
+                                <button className="btn btn-primary" onClick={Search}>Search</button>
                             </div>
                         </div>
 
                     </div>
                     <div className="col-5 col-sm-5 col-lg-5 col-xl-5 col-xxl-5 ">
-                        <div className=" btn-group d-flex justify-content-between mt-4">
+                        <div className=" btn-group  mt-4">
                             <div className="">
-                                <button className="btn btn-sm " id="shoppingCart" onClick={() => {
+                                <button className="btn btn-sm " id="shoppingCartBtn" onClick={() => {
                                     changeUrl("/cart")
                                 }}>
                                     <span className="h6" >
@@ -42,40 +68,53 @@ const Header = () => {
                                     </span>
                                 </button>
                             </div>
-                            <div className="">
-                                <button className="btn btn-primary" id="loginButton" onClick={() => {
-                                    changeUrl("/login")
-                                }}>
-                                    Login
-                                </button>
-                            </div>
-                            <div className="">
-                                <button className="btn btn-sm " onClick={() => {
-                                    changeUrl("/account-settings")
-                                }}>
-                                    <span className="h6" >
-                                        <FaUserAlt />&nbsp;
-                                        Account
-                                    </span>
-                                </button>
-                            </div>
-                            <div className="">
-                                <button className="btn btn-sm  " onClick={() => {
-                                    changeUrl("/dashboard")
-                                }}>
-                                    <span className="h6" >
-                                        Dashboard
-                                        <AiFillDashboard />&nbsp;
-                                    </span>
-                                </button>
-                            </div>
-                            <div className="">
-                                <button className="btn btn-sm btn-primary ">
-                                    <span className="h6" >
-                                        Log out
-                                    </span>
-                                </button>
-                            </div>
+                            {
+                                !userIsLoggedIn ?
+
+                                    <div className="mx-5">
+                                        <button className="btn btn-primary" id="loginButton" onClick={() => {
+                                            changeUrl("/login")
+                                        }}>
+                                            Login
+                                        </button>
+                                    </div>
+                                    :
+                                    <>
+
+                                        <div className="mx-4">
+                                            <button className="btn btn-sm " onClick={() => {
+                                                changeUrl("/account-settings")
+                                            }}>
+                                                <span className="h6" >
+                                                    <FaUserAlt />&nbsp;
+                                                    Account
+                                                </span>
+                                            </button>
+                                        </div>
+                                        {
+                                            !userIsAdmin &&
+                                            <div className="mx-4">
+                                                <button className="btn btn-sm  " onClick={() => {
+                                                    changeUrl("/dashboard")
+                                                }}>
+                                                    <span className="h6" >
+                                                        Dashboard
+                                                        <AiFillDashboard />&nbsp;
+                                                    </span>
+                                                </button>
+                                            </div>
+
+
+                                        }
+                                        <div className="mx-4">
+                                            <button className="btn btn-sm btn-primary ">
+                                                <span className="h6" >
+                                                    Log out
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </>
+                            }
                         </div>
                     </div>
                 </div>
@@ -85,4 +124,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

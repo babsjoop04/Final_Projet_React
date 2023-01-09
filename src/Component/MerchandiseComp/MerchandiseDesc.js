@@ -1,21 +1,51 @@
 import Header from "../HeaderAndFooter/Header";
 import Footer from "../HeaderAndFooter/Footer";
-import { useState } from "react";
+import WaitingPage from "../WaitingPage";
+import { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
+import { useParams } from "react-router-dom";
+import { connect } from "react-redux";
+import createAddToCard from "../../Redux/Actions/createAddToCard";
 
-const MerchandiseDesc = ({ id, title, brand, rating, price, desciption, imgsSrc, }) => {
-    // creation state var to store product image
-    const [srcImg, setSrc] = useState(imgsSrc[0]);
+const mapStateToProps = ({ storage }) => {
+    return {
+        storage: storage,
+    };
+};
 
-    // and image swap function
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchAddToCard: (payload) => dispatch(createAddToCard(payload))
+
+    }
+}
+
+const MerchandiseDesc = ({ storage, dispatchAddToCard }) => {
+    const params = useParams();
+
+    const [idx, setIdx] = useState(-1)
+
+
+
+    useEffect(() => {
+
+        const idxProduct = [...storage].findIndex((product) => {
+            return product.category.name === params.category && product.title === params.title
+        })
+
+        idxProduct >= 0 && setIdx(idxProduct)
+
+    }, [storage, params.category, params.title])
+
+
+    //  image swap function
     const changeImgSrc = (e) => {
-        setSrc(e.target.src);
+        document.getElementById("imgPlace").src = e.target.src
     };
 
     // initialization number of ordered products
-    // and functions to change it
     const [orderedProduct, setOrderedProduct] = useState(0);
-
+    // and functions to change it
     const increaseOrders = () => {
         setOrderedProduct(orderedProduct + 1);
     };
@@ -26,38 +56,67 @@ const MerchandiseDesc = ({ id, title, brand, rating, price, desciption, imgsSrc,
             : setOrderedProduct(0);
     };
 
-    return (
+
+
+    const AddToCard = () => {
+
+        orderedProduct > 0 && dispatchAddToCard(
+            {
+                title: params.title,
+                category: params.category,
+                orderedQuantity: orderedProduct
+
+            })
+
+        alert("Products added to cart")
+    }
+
+
+
+
+
+
+
+
+    return idx === -1 ? (
+        <WaitingPage />
+    ) : (
         <>
             <Header />
 
             <div
                 className="container-fluid text-center my-4"
-                id={`MerchandiseDesc-${id}`}
+                id={`MerchandiseDesc-${[...storage][idx]}`}
             >
                 <div className="row">
                     <div className="col col-sm col-md col-lg col-xl col-xxl">
                         <div className="row my-3">
                             <div className="col col-sm col-md col-lg col-xl col-xxl">
-                                <img src={srcImg} className="img-fluid" alt="img" />
+                                <img src={
+                                    [...storage][idx].images[0]
+                                } className="img-fluid" alt="img" id="imgPlace" />
                             </div>
                         </div>
                         <div className="row">
                             <div className="col col-sm col-md col-lg col-xl col-xxl">
                                 <div className="row" id="pictureShow" onClick={changeImgSrc}>
-                                    {imgsSrc.map((imgSrc, idx) => {
-                                        return (
-                                            <div
-                                                className="col-3 col-sm-3 col-lg-3 col-xl clo-xxl "
-                                                key={idx}
-                                            >
-                                                <img
-                                                    src={imgSrc}
-                                                    className="imgProduct img-fluid"
-                                                    alt="imgProduct"
-                                                />
-                                            </div>
-                                        );
-                                    })}
+                                    {
+                                        [...storage][idx].images.map((imgSrc, idx) => {
+
+                                            return (
+                                                <div
+                                                    className="col-3 col-sm-3 col-lg-3 col-xl clo-xxl "
+                                                    key={idx}
+                                                >
+                                                    <img
+                                                        src={imgSrc}
+                                                        className="imgProduct img-fluid"
+                                                        alt="imgProduct"
+                                                    />
+                                                </div>
+                                            );
+                                        })
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -65,15 +124,24 @@ const MerchandiseDesc = ({ id, title, brand, rating, price, desciption, imgsSrc,
                     <div className="col col-sm col-md col-lg col-xl col-xxl">
                         <div className="row">
                             <div className="col col-sm col-md col-lg col-xl col-xxl">
-                                <h2>{title}</h2>
+                                <h2>{
+                                    [...storage][idx].title
+                                }</h2>
                                 <p>
-                                    Brand : <strong className="h4">{brand}</strong>
+                                    Brand : <strong className="h4">Undefined</strong>
                                 </p>
                                 <p>
-                                    Rating : <strong className="h4">{rating}/5</strong>
+                                    Rating : <strong className="h4">4.8/5</strong>
                                 </p>
                                 <p>
-                                    Price : <strong className="h4">{price} F CFA</strong>
+                                    Price :&nbsp;
+                                    <strong className="h4">
+                                        {
+                                            [...storage][idx].price * 655
+                                        }
+
+                                        &nbsp;F CFA
+                                    </strong>
                                 </p>
                             </div>
                         </div>
@@ -98,7 +166,8 @@ const MerchandiseDesc = ({ id, title, brand, rating, price, desciption, imgsSrc,
                                     </button>
                                 </div>
                                 <div className="">
-                                    <button className="btn btn-primary" id="AddToCard">
+                                    <button className="btn btn-primary" id="AddToCard"
+                                        onClick={AddToCard}>
                                         <FaShoppingCart />
                                         &nbsp; Add to card
                                     </button>
@@ -108,15 +177,18 @@ const MerchandiseDesc = ({ id, title, brand, rating, price, desciption, imgsSrc,
                         <div className="row">
                             <div className="col col-sm col-md col-lg col-xl col-xxl">
                                 <h5>Description</h5>
-                                <p>{desciption}</p>
+                                <p>
+                                    {
+                                        [...storage][idx].description
+                                    }
+                                </p>
                             </div>
                             <div className="col col-sm col-md col-lg col-xl col-xxl">
                                 <h5>Technical sheet</h5>
                                 <p>
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
                                     doloremque, temporibus, non architecto veniam illo error
-                                    dolorem velit dicta aliquid facere, voluptates quia ipsum
-                                    consectetur obcaecati possimus quos sint! Minima.
+                                    dolorem velit dicta aliquid facere
                                 </p>
                             </div>
                         </div>
@@ -132,7 +204,7 @@ const MerchandiseDesc = ({ id, title, brand, rating, price, desciption, imgsSrc,
 MerchandiseDesc.defaultProps = {
     id: 1,
     title: "Iphone XR",
-    brand: "Iphone",
+    brand: "Undefined",
     rating: 4.8,
     price: 300000,
     desciption:
@@ -145,4 +217,4 @@ MerchandiseDesc.defaultProps = {
     ],
 };
 
-export default MerchandiseDesc;
+export default connect(mapStateToProps, mapDispatchToProps)(MerchandiseDesc);

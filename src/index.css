@@ -40,7 +40,7 @@ Home style
 #filterForm {
   border: 1px solid #9a9999;
   background-color: #ffffff;
-  height: 320px;
+  /* height: 320px; */
 }
 
 /* 
@@ -59,7 +59,8 @@ MerchandiseDesc
 loginPage 
 */
 
-#loginPage {
+#loginPage,
+#waitPage {
   background-color: #91eae4;
   background: linear-gradient(to left, #91eae4, #078fcd);
 }
