@@ -3,6 +3,7 @@ import { AiFillDashboard } from "react-icons/ai"
 import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import createSearch from "../../Redux/Actions/createSearch";
+import createLogOut from "../../Redux/Actions/createLogOut";
 
 const mapStateToProps = ({ userIsLoggedIn, userIsAdmin }) => {
     return {
@@ -14,12 +15,13 @@ const mapStateToProps = ({ userIsLoggedIn, userIsAdmin }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchSearch: (payload) => dispatch(createSearch(payload))
+        dispatchSearch: (payload) => dispatch(createSearch(payload)),
+        dispathLogOut: (payload) => dispatch(createLogOut(payload))
 
     }
 }
 
-const Header = ({ userIsLoggedIn, userIsAdmin, dispatchSearch }) => {
+const Header = ({ userIsLoggedIn, userIsAdmin, dispatchSearch, dispathLogOut }) => {
 
     const changeUrl = useNavigate()
 
@@ -29,6 +31,15 @@ const Header = ({ userIsLoggedIn, userIsAdmin, dispatchSearch }) => {
             searchInputValue: searchInputValue
         })
         changeUrl("/")
+
+    }
+
+    const LogOut = () => {
+
+        dispathLogOut(null)
+
+        changeUrl("/")
+
 
     }
 
@@ -69,16 +80,7 @@ const Header = ({ userIsLoggedIn, userIsAdmin, dispatchSearch }) => {
                                 </button>
                             </div>
                             {
-                                !userIsLoggedIn ?
-
-                                    <div className="mx-5">
-                                        <button className="btn btn-primary" id="loginButton" onClick={() => {
-                                            changeUrl("/login")
-                                        }}>
-                                            Login
-                                        </button>
-                                    </div>
-                                    :
+                                userIsLoggedIn ?
                                     <>
 
                                         <div className="mx-4">
@@ -92,7 +94,7 @@ const Header = ({ userIsLoggedIn, userIsAdmin, dispatchSearch }) => {
                                             </button>
                                         </div>
                                         {
-                                            !userIsAdmin &&
+                                            userIsAdmin &&
                                             <div className="mx-4">
                                                 <button className="btn btn-sm  " onClick={() => {
                                                     changeUrl("/dashboard")
@@ -107,13 +109,23 @@ const Header = ({ userIsLoggedIn, userIsAdmin, dispatchSearch }) => {
 
                                         }
                                         <div className="mx-4">
-                                            <button className="btn btn-sm btn-primary ">
+                                            <button className="btn btn-sm btn-primary "
+                                                onClick={LogOut}>
                                                 <span className="h6" >
                                                     Log out
                                                 </span>
                                             </button>
                                         </div>
                                     </>
+                                    :
+                                    <div className="mx-5">
+                                        <button className="btn btn-primary" id="loginButton" onClick={() => {
+                                            changeUrl("/login")
+                                        }}>
+                                            Login
+                                        </button>
+                                    </div>
+
                             }
                         </div>
                     </div>

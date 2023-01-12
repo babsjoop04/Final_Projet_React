@@ -3,6 +3,7 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 
 const LogInPage = () => {
+
   const [haveAccount, setHaveAccount] = useState(true);
   const [message1, changeMessage1] = useState("Don't have an account");
   const [message2, changeMessage2] = useState("sign up");
@@ -22,7 +23,8 @@ const LogInPage = () => {
   return (
     <div className="container-fluid text-center py-5" id="loginPage">
       <div className="row">
-        <div className="col col-sm col-md col-lg col-xl col-xxl pt-2">
+        <div className="col col-sm col-md col-lg col-xl col-xxl pt-2"
+        >
           <img
             src="/img/Logo/afficheLogo.gif"
             alt="logoPoster"

@@ -1,18 +1,80 @@
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook, BsApple } from "react-icons/bs";
-const SignIn = () => {
+import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
+import createLoginAsAdmin from "../../Redux/Actions/createLoginAsAdmin";
+import createLoginAsSimpleUser from "../../Redux/Actions/createLoginAsSimpleUser";
+
+
+const mapStateToProps = ({ AllAdminUsers, AllSimpleUsersAccount }) => {
+    return {
+        AllAdminUsers: AllAdminUsers,
+        AllSimpleUsersAccount: AllSimpleUsersAccount
+    };
+};
+const mapDispachToProps = (dispatch) => {
+    return {
+        dispatchLoginAsAdmin: (payload) => dispatch(createLoginAsAdmin(payload)),
+        dispatchLoginAsSimpleUser: (payload) => dispatch(createLoginAsSimpleUser(payload))
+
+    };
+};
+const SignIn = ({ AllAdminUsers, AllSimpleUsersAccount, dispatchLoginAsAdmin, dispatchLoginAsSimpleUser }) => {
+
+    const changeUrl = useNavigate();
+
+    const Login = () => {
+        const emailOrUsername = document.getElementById("emailOrUsernameForLogin").value
+        const password = document.getElementById("passwordForLogin").value
+
+        const isAdmin = [...AllAdminUsers].findIndex((userAccount) => {
+            return (userAccount.email === emailOrUsername || userAccount.username === emailOrUsername) && userAccount.password === password
+        })
+
+        const isSimpleUser =
+            [...AllSimpleUsersAccount].length > 0 ?
+                [...AllSimpleUsersAccount].findIndex((userAccount) => {
+                    return (userAccount.email === emailOrUsername || userAccount.username === emailOrUsername) && userAccount.password === password
+                })
+                :
+                -1
+        if (isAdmin >= 0) {
+
+            dispatchLoginAsAdmin({
+                idx: isAdmin
+            })
+
+            changeUrl("/")
+
+        } else if (isSimpleUser >= 0) {
+
+            dispatchLoginAsSimpleUser({
+                idx: isSimpleUser
+            })
+
+            changeUrl("/")
+
+
+        } else {
+            console.log("pas inscrit");
+
+        }
+
+
+    }
+
     return (
         <div className="col" id="SignInPage">
             <h3>Sign in</h3>
             <div className="row">
-                <form>
+                <form autoComplete="off">
                     <div className="input-group input-group-sm mb-4">
-                        <span className=" input-group-text">Email address</span>
+                        <span className=" input-group-text">Email address or username</span>
                         <input
-                            type="email"
+                            type="text"
                             className="form-control form-control-sm"
-                            id="emailForLogin"
-                            placeholder="example@example.com"
+                            id="emailOrUsernameForLogin"
+                            placeholder="example@example.com or example123"
                         />
                     </div>
                     <div className="input-group input-group-sm mb-4">
@@ -28,7 +90,20 @@ const SignIn = () => {
             </div>
             <div className="row">
                 <div className="col col-sm col-md col-lg col-xl col-xxl">
-                    <button className="btn btn-outline-primary ">Log in</button>
+                    <button className="btn btn-outline-primary mx-2" onClick={Login}>
+                        Log in
+                    </button>
+                    <div className="row">
+                        <div className="col">
+                            <button
+                                className="btn btn-outline-primary mx-2 mt-3"
+                                onClick={() => changeUrl("/")}
+                            >
+                                Return to the home page
+                            </button>
+                        </div>
+                    </div>
+
                     <div className="row">
                         <div className="col col-sm col-md col-lg col-xl col-xxl">
                             <div className=" btn-group mt-3">
@@ -44,10 +119,28 @@ const SignIn = () => {
                             </div>
                         </div>
                     </div>
+                    <div className="row mt-3">
+                        <div className="col col-sm col-md col-lg col-xl col-xxl">
+                            <h3>Try the administrator account</h3>
+                            {[...AllAdminUsers].length > 0 ? (
+                                [...AllAdminUsers].map((account) => {
+                                    return (
+                                        <div key={account.id}>
+                                            <h4>Email address : {account.email}</h4>
+                                            <h4>Username : {account.username}</h4>
+                                            <h4>Pasword : {account.password}</h4>
+                                        </div>
+                                    );
+                                })
+                            ) : (
+                                <div className="spinner-border text-info"></div>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
 
-export default SignIn;
+export default connect(mapStateToProps, mapDispachToProps)(SignIn);

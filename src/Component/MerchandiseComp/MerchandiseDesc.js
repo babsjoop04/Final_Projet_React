@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import createAddToCard from "../../Redux/Actions/createAddToCard";
+import createAddToCart from "../../Redux/Actions/createAddToCart";
 
 const mapStateToProps = ({ storage }) => {
     return {
@@ -15,7 +15,7 @@ const mapStateToProps = ({ storage }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchAddToCard: (payload) => dispatch(createAddToCard(payload))
+        dispatchAddToCard: (payload) => dispatch(createAddToCart(payload))
 
     }
 }
@@ -60,15 +60,20 @@ const MerchandiseDesc = ({ storage, dispatchAddToCard }) => {
 
     const AddToCard = () => {
 
-        orderedProduct > 0 && dispatchAddToCard(
-            {
-                title: params.title,
-                category: params.category,
-                orderedQuantity: orderedProduct
+        orderedProduct > 0
+            &&
+            dispatchAddToCard(
+                {
+                    title: params.title,
+                    category: params.category,
+                    orderedQuantity: orderedProduct
 
-            })
+                })
+            &&
 
-        alert("Products added to cart")
+            setOrderedProduct(0)
+
+
     }
 
 

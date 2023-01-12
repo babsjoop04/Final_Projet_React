@@ -1,7 +1,8 @@
 import Home from "./Component/Home/Home";
 import LogInPage from "./Component/LoginPage/LogInPage";
 import MerchandiseDesc from "./Component/MerchandiseComp/MerchandiseDesc";
-import AccountSettings from "./Component/User/AccountSettings";
+// import AccountSettings from "./Component/User/AccountSettings";
+import PrivateAccountSettings from "./Component/User/PrivateAccountSettings";
 import UserCart from "./Component/User/UserCart";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
@@ -25,18 +26,16 @@ function App({ dispatchCreateInitialState }) {
 
   const requestToGetAllCategories = axios.get("https://api.escuelajs.co/api/v1/categories?offset=0&limit=5")
 
-  const requestToGetAllAdminUsers = axios.get("https://dummyjson.com/users?skip=4&limit=1")
 
 
   useEffect(() => {
     setTimeout(() => {
-      axios.all([requestToGetAllProducts, requestToGetAllCategories, requestToGetAllAdminUsers])
+      axios.all([requestToGetAllProducts, requestToGetAllCategories])
         .then(
-          axios.spread((response1, response2, response3) => {
+          axios.spread((response1, response2) => {
             dispatchCreateInitialState({
               AllProducts: response1.data,
               AllCategories: response2.data,
-              AllAdminUsers: response3.data.users,
               isLoading: false
             })
           })
@@ -55,7 +54,7 @@ function App({ dispatchCreateInitialState }) {
           <Route index path="/" element={<Home />} />
           <Route path="/login" element={<LogInPage />} />
           <Route path="/description-product/:category/:title" element={<MerchandiseDesc />} />
-          <Route path="/account-settings" element={<AccountSettings />} />
+          <Route path="/account-settings" element={<PrivateAccountSettings />} />
           <Route path="/cart" element={<UserCart />} />
         </Routes>
       </BrowserRouter>
