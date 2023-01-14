@@ -7,9 +7,10 @@ import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import createAddToCart from "../../Redux/Actions/createAddToCart";
 
-const mapStateToProps = ({ storage }) => {
+const mapStateToProps = ({ storage, AllProducts }) => {
     return {
         storage: storage,
+        AllProducts: AllProducts
     };
 };
 
@@ -20,7 +21,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const MerchandiseDesc = ({ storage, dispatchAddToCard }) => {
+const MerchandiseDesc = ({ storage, AllProducts, dispatchAddToCard }) => {
     const params = useParams();
 
     const [idx, setIdx] = useState(-1)
@@ -60,18 +61,16 @@ const MerchandiseDesc = ({ storage, dispatchAddToCard }) => {
 
     const AddToCard = () => {
 
-        orderedProduct > 0
-            &&
-            dispatchAddToCard(
-                {
-                    title: params.title,
-                    category: params.category,
-                    orderedQuantity: orderedProduct
-
-                })
-            &&
+        if (orderedProduct > 0) {
+            const product = [...AllProducts].filter((product) => product.title === params.title && product.category.name === params.category)
+            dispatchAddToCard({
+                product: [...product][0],
+                orderedQuantity: orderedProduct
+            })
 
             setOrderedProduct(0)
+        }
+
 
 
     }

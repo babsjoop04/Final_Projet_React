@@ -5,13 +5,16 @@ import { useState } from "react";
 import createChangeSimpleAccountInfo from "../../Redux/Actions/createChangeSimpleAccountInfo";
 import createChangeAdminAccountInfo from "../../Redux/Actions/createChangeAdminAccountInfo";
 import { useNavigate } from "react-router-dom";
+import createDeleteSimpleAccount from "../../Redux/Actions/createDeleteSimpleAccount";
+import createDeleteAdminAccount from "../../Redux/Actions/createDeleteAdminAccount";
 
 
-const mapStateToProps = ({ connectedUser, userIsLoggedIn, userIsAdmin }) => {
+const mapStateToProps = ({ connectedUser, userIsLoggedIn, userIsAdmin, AllAdminUsers }) => {
     return {
         connectedUser: connectedUser,
         userIsLoggedIn: userIsLoggedIn,
         userIsAdmin: userIsAdmin,
+        AllAdminUsers: AllAdminUsers
     };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -20,15 +23,22 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(createChangeSimpleAccountInfo(payload)),
         dispatchChangeAdminAccountInfo: (payload) =>
             dispatch(createChangeAdminAccountInfo(payload)),
+        dispatchDeleteSimpleAccount: (payload) => dispatch(createDeleteSimpleAccount(payload)),
+        dispatchDeleteAdminAccount: (payload) => dispatch(createDeleteAdminAccount(payload))
+
     };
 };
 
-const AccountSettings = ({ connectedUser, userIsLoggedIn, userIsAdmin, dispatchChangeSimpleAccountInfo, dispatchChangeAdminAccountInfo, }) => {
+const AccountSettings = ({ connectedUser, userIsAdmin, AllAdminUsers, dispatchChangeSimpleAccountInfo, dispatchChangeAdminAccountInfo, dispatchDeleteSimpleAccount, dispatchDeleteAdminAccount }) => {
     const changeUrl = useNavigate();
     const [wouldChangeInfo, setWouldChangeInfo] = useState(false);
 
     const [messageAlert, changeMessage] = useState("");
     const [classAlert, changeClass] = useState("");
+
+
+    const [messageAlert2, changeMessage2] = useState("");
+    const [classAlert2, changeClass2] = useState("");
 
 
 
@@ -104,274 +114,311 @@ const AccountSettings = ({ connectedUser, userIsLoggedIn, userIsAdmin, dispatchC
             changeClass("alert alert-danger");
         }
     };
+
+
+    const deleteAccount = () => {
+
+        if (document.getElementById("deleteCheck").checked) {
+
+            if (userIsAdmin) {
+
+                if ([...AllAdminUsers].length === 1) {
+                    changeMessage2("To delete an admin account, there must be at least 1 other admin account left, there is only 1 registered admin account")
+                    changeClass2("alert alert-danger");
+                } else {
+                    changeMessage2("Successful deletion")
+                    changeClass2("alert alert-primary");
+
+                    setTimeout(() => {
+
+                        dispatchDeleteAdminAccount({ id: connectedUser[0].id })
+
+                        changeUrl("/")
+                    }, 1500)
+
+                }
+
+
+            } else {
+                changeMessage2("Successful deletion")
+                changeClass2("alert alert-primary");
+
+                setTimeout(() => {
+
+                    dispatchDeleteSimpleAccount({ id: connectedUser[0].id })
+
+                    changeUrl("/")
+                }, 1500)
+            }
+
+
+        }
+        else {
+            changeMessage2("Please confirm permssion to delete your account !!")
+            changeClass2("alert alert-danger");
+
+        }
+
+    }
     return (
         <>
             <Header />
 
-            <div className="container-fluid text-center mt-3 mb-5">
-                <h1>Account Settings</h1>
-                <form autoComplete="off">
-                    <div className="row">
-                        <div className="col col-sm col-md col-lg col-xl col-xxl ">
-                            <fieldset>
-                                <legend className="h3">Personal information</legend>
-                                {wouldChangeInfo ? (
-                                    <>
-                                        <div className="input-group mb-3">
-                                            <span className="input-group-text">Your name</span>
-                                            &nbsp;&nbsp;
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                placeholder="First Name"
-                                                id="newFirstName"
-                                                defaultValue={connectedUser[0].firstName}
-                                            />
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                placeholder="Last Name"
-                                                id="newLastName"
-                                                defaultValue={connectedUser[0].lastName}
-                                            />
-                                        </div>
+            <div className="container-fluid text-center  mt-3 mb-5">
+                <h2>Account settings</h2>
+                <div className=" mt-4 d-flex  justify-content-center">
+                    {
+                        wouldChangeInfo ?
+                            <div className="">
+                                <div className="row">
+                                    <div className="col col-sm col-md col-lg col-xl col-xxl">
+                                        <fieldset>
+                                            <legend>Personal info</legend>
+                                            <div className="input-group mb-3">
+                                                <span className="input-group-text">Your name</span>
+                                                &nbsp;&nbsp;
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="First Name"
+                                                    id="newFirstName"
+                                                    defaultValue={connectedUser[0].firstName}
+                                                />
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="Last Name"
+                                                    id="newLastName"
+                                                    defaultValue={connectedUser[0].lastName}
+                                                />
+                                            </div>
 
-                                        <div className="input-group mx-3  mb-3">
-                                            <span className=" mx-1">Change your gender :</span>
-                                            &nbsp;&nbsp;
-                                            <span className="form-check">
+                                            <div className="input-group mx-3  mb-3">
+                                                <span className=" mx-1">Change your gender :</span>
+                                                &nbsp;&nbsp;
+                                                <span className="form-check">
+                                                    <input
+                                                        type="radio"
+                                                        className="form-check-input"
+                                                        name="gender"
+                                                        id="man"
+                                                    />
+                                                    <span className="form-check-label">Man</span>
+                                                </span>
+                                                <span className="form-check mx-3 ">
+                                                    <input
+                                                        type="radio"
+                                                        className="form-check-input"
+                                                        name="gender"
+                                                        id="woman"
+                                                    />
+                                                    <span className="form-check-label">Woman</span>
+                                                </span>
+                                            </div>
+                                            <div className="input-group  mb-3">
+                                                <span className="input-group-text">Your birthdate :</span>
+                                                &nbsp;&nbsp;
                                                 <input
-                                                    type="radio"
-                                                    className="form-check-input"
-                                                    name="gender"
-                                                    id="man"
+                                                    type="text"
+                                                    className="form-control"
+                                                    name="newBirthDate"
+                                                    id="newBirthDate"
+                                                    defaultValue={connectedUser[0].birthDate}
                                                 />
-                                                <span className="form-check-label">Man</span>
-                                            </span>
-                                            <span className="form-check mx-3 ">
+                                            </div>
+                                            <div className="input-group  mb-3">
+                                                <span className="input-group-text">Your address </span>
+                                                &nbsp;&nbsp;
                                                 <input
-                                                    type="radio"
-                                                    className="form-check-input"
-                                                    name="gender"
-                                                    id="woman"
+                                                    type="text"
+                                                    className="form-control"
+                                                    name="address"
+                                                    id="newAddress"
+                                                    placeholder="your address or delivery address"
+                                                    defaultValue={connectedUser[0].address}
                                                 />
-                                                <span className="form-check-label">Woman</span>
-                                            </span>
-                                        </div>
-                                        <div className="input-group  mb-3">
-                                            <span className="input-group-text">Your birthdate :</span>
-                                            &nbsp;&nbsp;
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                name="newBirthDate"
-                                                id="newBirthDate"
-                                                defaultValue={connectedUser[0].birthDate}
-                                            />
-                                        </div>
-                                        <div className="input-group  mb-3">
-                                            <span className="input-group-text">Your address </span>
-                                            &nbsp;&nbsp;
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                name="address"
-                                                id="newAddress"
-                                                placeholder="your address or delivery address"
-                                                defaultValue={connectedUser[0].address}
-                                            />
-                                        </div>
-                                    </>
-                                ) : (
-                                    <>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div className="col col-sm col-md col-lg col-xl col-xxl">
+                                        <fieldset>
+                                            <legend>Login info</legend>
+                                            <div className="input-group mb-3">
+                                                <span className="input-group-text">Your email</span>
+                                                <input
+                                                    type="email"
+                                                    className="form-control"
+                                                    placeholder="example@example.com"
+                                                    id="newEmail"
+                                                    defaultValue={connectedUser[0].email}
+                                                />
+                                            </div>
+
+                                            <div className="input-group mb-3">
+                                                <span className="input-group-text">@</span>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="your username"
+                                                    id="newUsename"
+                                                    defaultValue={connectedUser[0].username}
+                                                />
+                                            </div>
+
+                                            <div className="mt-4">
+                                                <p>
+                                                    <em>
+                                                        NB : If you do not want to change your current
+                                                        password, leave the following 2 fields empty
+                                                    </em>
+                                                </p>
+                                            </div>
+
+                                            <div className="input-group  mb-3">
+                                                <span className="input-group-text">New password</span>
+                                                <input
+                                                    type="password"
+                                                    className="form-control"
+                                                    name="newPassword"
+                                                    id="newPassword"
+                                                />
+                                            </div>
+                                            <div className="input-group mb-3 ">
+                                                <span className="input-group-text">Confirm password</span>
+                                                <input
+                                                    type="password"
+                                                    className="form-control"
+                                                    name="newConfirmPassword"
+                                                    id="newConfirmPassword"
+                                                />
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                                <div className="row">
+                                    <div className="col col-sm col-md col-lg col-xl col-xxl">
+
                                         <div className="mb-3">
-                                            <div className="mb-2">
-                                                <p id="currentFirstName">
-                                                    <span className="h5">Your firstName :</span>{" "}
-                                                    {connectedUser[0].firstName}
-                                                </p>
-                                            </div>
-                                            <div className="mb-2">
-                                                <p id="currentLastName">
-                                                    <span className="h5">Your lastName :</span>{" "}
-                                                    {connectedUser[0].lastName}
-                                                </p>
-                                            </div>
-                                            <div className="mb-2">
-                                                <p id="currentGender">
-                                                    <span className="h5">Your gender :</span>{" "}
-                                                    {connectedUser[0].gender}
-                                                </p>
-                                            </div>
-                                            <div className="mb-2">
-                                                <p id="currentBirthDate">
-                                                    <span className="h5">Your birthdate :</span>{" "}
-                                                    {connectedUser[0].birthDate}
-                                                </p>
-                                            </div>
-                                            <div className="mb-2">
-                                                <p id="currentAddress">
-                                                    <span className="h5">Your address :</span>{" "}
-                                                    {connectedUser[0].address}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </>
-                                )}
-                            </fieldset>
-                        </div>
-                        <div className="col col-sm col-md col-lg col-xl col-xxl">
-                            <fieldset>
-                                <legend className="h3">Login information</legend>
-                                {wouldChangeInfo ? (
-                                    <>
-                                        <div className="input-group mb-3">
-                                            <span className="input-group-text">Your email</span>
                                             <input
-                                                type="email"
-                                                className="form-control"
-                                                placeholder="example@example.com"
-                                                id="newEmail"
-                                                defaultValue={connectedUser[0].email}
-                                            />
+                                                type="checkbox"
+                                                name="updateCheck"
+                                                className="form-check-input"
+                                                id="updateCheck"
+                                            />{" "}
+                                            <span>
+                                                Yes I confirm I want to change my account information
+                                            </span>
                                         </div>
-
-                                        <div className="input-group mb-3">
-                                            <span className="input-group-text">@</span>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                placeholder="your username"
-                                                id="newUsename"
-                                                defaultValue={connectedUser[0].username}
-                                            />
-                                        </div>
-
-                                        <div className="mt-4">
-                                            <p>
-                                                <em>
-                                                    NB : If you do not want to change your current
-                                                    password, leave the following 2 fields empty
-                                                </em>
-                                            </p>
-                                        </div>
-
-                                        <div className="input-group  mb-3">
-                                            <span className="input-group-text">New password</span>
+                                        <div className="input-group">
+                                            <span className="input-group-text">
+                                                Confirm your current password
+                                            </span>
                                             <input
                                                 type="password"
                                                 className="form-control"
-                                                name="newPassword"
-                                                id="newPassword"
+                                                name="currentPassword"
+                                                id="currentPassword"
                                             />
-                                        </div>
-                                        <div className="input-group mb-3 ">
-                                            <span className="input-group-text">Confirm password</span>
-                                            <input
-                                                type="password"
-                                                className="form-control"
-                                                name="newConfirmPassword"
-                                                id="newConfirmPassword"
-                                            />
-                                        </div>
-                                    </>
-                                ) : (
-                                    <div className="mb-3">
-                                        <div className="mb-2">
-                                            <p>
-                                                <span className="h5">Your email :</span>{" "}
-                                                {connectedUser[0].email}
-                                            </p>
-                                        </div>
-                                        <div className="mb-2">
-                                            <p>
-                                                <span className="h5">Your username :</span>{" "}
-                                                {connectedUser[0].username}
-                                            </p>
-                                        </div>
 
-                                        <div className="mb-2 ">
-                                            <p>
-                                                <span className="h5">Your actual password :</span>{" "}
-                                                {connectedUser[0].password}
-                                            </p>
+                                            <button
+                                                className="btn btn-info"
+                                                id="updateBtn"
+                                                onClick={Update}
+                                            >
+                                                Update changes
+                                            </button>
+                                            <button
+                                                className="btn btn-danger"
+                                                id="cancelBtn"
+                                                onClick={() => setWouldChangeInfo(!wouldChangeInfo)}
+                                            >
+                                                Cancel
+                                            </button>
+                                        </div>
+                                        <div className="my-4 ">
+                                            <span className={classAlert}>{messageAlert}</span>
                                         </div>
                                     </div>
-                                )}
-                            </fieldset>
-                        </div>
-                    </div>
-                </form>
-                <div className="row mb-5 text-center">
-                    <div className="col col-sm col-md col-lg col-xl col-xxl">
-                        {wouldChangeInfo ? (
-                            <>
-                                <div className="mb-3">
-                                    <input
-                                        type="checkbox"
-                                        name="updateCheck"
-                                        className="form-check-input"
-                                        id="updateCheck"
-                                    />{" "}
-                                    <span>
-                                        Yes I confirm I want to change my account information
-                                    </span>
                                 </div>
-                                <div className="input-group">
-                                    <span className="input-group-text">
-                                        Confirm your current password
-                                    </span>
-                                    <input
-                                        type="password"
-                                        className="form-control"
-                                        name="currentPassword"
-                                        id="currentPassword"
-                                    />
+
+                                <div className="row mb-3">
+                                    <h2>Delete account</h2>
+                                    <div className="col">
+                                        <div className="mb-2">
+                                            <input type="checkbox" name="deleteCheck" id="deleteCheck" />{" "}
+                                            <span>Yes I am sure I want to delete my account</span>
+                                        </div>
+                                        <button className="btn btn-danger" id="deleteAccBtn"
+                                            onClick={deleteAccount}>
+                                            Delete
+                                        </button>
+                                    </div>
+                                    <div className="mt-4">
+                                        <span className={classAlert2}>{messageAlert2}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            :
+
+                            <div className="card" id="userCart">
+                                <img src={connectedUser[0].gender === "man" ? "/img/Profil/manProfil.png" : "/img/Profil/womanprofil.png"} className="card-img-top " alt="imgProfil" id="imgProfil" />
+                                <div className="card-body">
+                                    <div className="mb-2">
+                                        <span className="h3" id="currentFirstName">
+                                            {connectedUser[0].firstName}{" "}
+                                            {connectedUser[0].lastName}
+                                        </span>
+                                    </div>
+                                    <div className="mb-2">
+                                        <span className="h5">
+                                            @{connectedUser[0].username}
+                                        </span>
+                                    </div>
+
+                                    <div className="mb-2">
+                                        <p >
+                                            <span className="h5">Gender :</span>{" "}
+                                            {connectedUser[0].gender}
+                                        </p>
+                                    </div>
+                                    <div className="mb-2">
+                                        <p>
+                                            <span className="h5">Birthdate :</span>{" "}
+                                            {connectedUser[0].birthDate}
+                                        </p>
+                                    </div>
+                                    <div className="mb-2">
+                                        <p>
+                                            <span className="h5">Address :</span>{" "}
+                                            {connectedUser[0].address}
+                                        </p>
+                                    </div>
+                                    <div className="mb-2">
+                                        <p>
+                                            <span className="h5">Email :</span>{" "}
+                                            {connectedUser[0].email}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div>
 
                                     <button
-                                        className="btn btn-info"
+                                        className="btn btn-warning mx-2"
                                         id="updateBtn"
-                                        onClick={Update}
-                                    >
-                                        Update changes
-                                    </button>
-                                    <button
-                                        className="btn btn-danger"
-                                        id="cancelBtn"
                                         onClick={() => setWouldChangeInfo(!wouldChangeInfo)}
                                     >
-                                        Cancel
+                                        Change information
                                     </button>
                                 </div>
-                                <div className="mt-4">
-                                    <span className={classAlert}>{messageAlert}</span>
-                                </div>
-                            </>
-                        ) : (
-                            <button
-                                className="btn btn-info mx-2"
-                                id="updateBtn"
-                                onClick={() => setWouldChangeInfo(!wouldChangeInfo)}
-                            >
-                                Change information
-                            </button>
-                        )}
-                    </div>
+                            </div>
+                    }
+
+
+
                 </div>
-                <div className="row mb-3">
-                    <h3>Delete account</h3>
-                    <div className="col">
-                        <input type="checkbox" name="deleteCheck" id="deleteCheck" />
-                        <span>Yes I am sure I want to delete my account</span>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col">
-                        <button className="btn btn-danger" id="deleteAccBtn">
-                            Delete
-                        </button>
-                    </div>
-                </div>
+
+
             </div>
 
             <Footer />

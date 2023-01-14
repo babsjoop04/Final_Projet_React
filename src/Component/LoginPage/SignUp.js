@@ -56,7 +56,6 @@ const SignUp = ({ AllAdminUsers, AllSimpleUsersAccount, dispatchCreateNewAccount
     })
     const birthDate = document.getElementById("birthDate").value
     const address = document.getElementById("address").value
-    const phone = document.getElementById("phone").value
 
     const email = document.getElementById("email").value
     const userName = document.getElementById("userName").value
@@ -64,7 +63,7 @@ const SignUp = ({ AllAdminUsers, AllSimpleUsersAccount, dispatchCreateNewAccount
     const confirmPassword = document.getElementById("confirmPassword").value
 
 
-    if (firstName === "" || lastName === "" || userGender === undefined || birthDate === "" || address === "" || phone === "" || email === "" || userName === "" || password !== confirmPassword) {
+    if (firstName === "" || lastName === "" || userGender === undefined || birthDate === "" || address === "" || email === "" || userName === "") {
       setMessage("Please complete the form!!");
       changeClass("alert alert-danger");
     }
@@ -81,21 +80,29 @@ const SignUp = ({ AllAdminUsers, AllSimpleUsersAccount, dispatchCreateNewAccount
         changeClass("alert alert-danger");
 
       } else {
+        if (password === confirmPassword) {
 
-        dispatchCreateNewAccount({
-          id: Date.now,
-          firstName: firstName,
-          lastName: lastName,
-          gender: userGender,
-          email: email,
-          phone: phone,
-          username: userName,
-          password: password,
-          birthDate: birthDate
-        })
+          dispatchCreateNewAccount({
+            id: Date.now,
+            firstName: firstName,
+            lastName: lastName,
+            gender: userGender,
+            email: email,
+            username: userName,
+            password: password,
+            birthDate: birthDate,
+            address: address
+          })
 
-        changeUrl("/")
+          changeUrl("/")
 
+        } else {
+
+          setMessage("Please check passwords they don't match");
+
+          changeClass("alert alert-danger");
+
+        }
 
       }
 
@@ -173,17 +180,7 @@ const SignUp = ({ AllAdminUsers, AllSimpleUsersAccount, dispatchCreateNewAccount
               />
             </div>
 
-            <div className="input-group  mb-3">
-              <span className="input-group-text">Your number phone </span>
-              &nbsp;&nbsp;
-              <input
-                type="text"
-                className="form-control"
-                name="phone"
-                id="phone"
-                placeholder="ex: +221 77 772 76 78"
-              />
-            </div>
+
           </div>
         </fieldset>
         <fieldset>

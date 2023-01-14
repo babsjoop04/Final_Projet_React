@@ -17,7 +17,8 @@ Logo
 }
 
 #Footer,
-#loginPage {
+#loginPage,
+#userCart {
   color: #ffffff;
 }
 
@@ -60,7 +61,12 @@ loginPage
 */
 
 #loginPage,
-#waitPage {
+#waitPage,
+#userCart {
   background-color: #91eae4;
   background: linear-gradient(to left, #91eae4, #078fcd);
 }
+
+/* #imgProfil {
+  width: 30;
+} */
