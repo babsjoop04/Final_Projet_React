@@ -27,10 +27,13 @@ const Header = ({ userIsLoggedIn, userIsAdmin, dispatchSearch, dispathLogOut }) 
 
     const Search = () => {
         const searchInputValue = document.getElementById("searchInput").value
-        dispatchSearch({
-            searchInputValue: searchInputValue
-        })
-        changeUrl("/")
+        if (searchInputValue !== "") {
+
+            dispatchSearch({
+                searchInputValue: searchInputValue
+            })
+            changeUrl("/")
+        }
 
     }
 

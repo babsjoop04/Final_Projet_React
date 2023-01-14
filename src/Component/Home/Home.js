@@ -113,18 +113,26 @@ const Home = ({ AllProducts, AllCategories, isLoading, dispatchFilter }) => {
                         id="viewMarchandise"
                     >
                         {/* (sert affichage des biens) */}
-                        {[...AllProducts].map((product) => {
-                            return (
-                                <MerchandiseCardHome
-                                    key={product.id}
-                                    id={product.id}
-                                    title={product.title}
-                                    price={product.price * 655}
-                                    imageSrc={[...product.images][0]}
-                                    category={product.category.name}
-                                />
-                            );
-                        })}
+
+                        {[...AllProducts].length > 0 ?
+                            [...AllProducts].map((product) => {
+                                return (
+                                    <MerchandiseCardHome
+                                        key={product.id}
+                                        id={product.id}
+                                        title={product.title}
+                                        price={product.price * 655}
+                                        imageSrc={[...product.images][0]}
+                                        category={product.category.name}
+                                    />
+                                );
+                            })
+                            :
+                            <div className="col mt-5">
+                                <h3>no product corresponds to your search</h3>
+                            </div>
+
+                        }
                     </div>
                 </div>
             </div>

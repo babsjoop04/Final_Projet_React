@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import createLoginAsAdmin from "../../Redux/Actions/createLoginAsAdmin";
 import createLoginAsSimpleUser from "../../Redux/Actions/createLoginAsSimpleUser";
+import { useState } from "react";
 
 
 const mapStateToProps = ({ AllAdminUsers, AllSimpleUsersAccount }) => {
@@ -23,42 +24,55 @@ const SignIn = ({ AllAdminUsers, AllSimpleUsersAccount, dispatchLoginAsAdmin, di
 
     const changeUrl = useNavigate();
 
+    const [classAlert, setClass] = useState("")
+    const [message, setMessage] = useState("")
+
+
     const Login = () => {
         const emailOrUsername = document.getElementById("emailOrUsernameForLogin").value
         const password = document.getElementById("passwordForLogin").value
+        if (emailOrUsername !== "" && password !== "") {
 
-        const isAdmin = [...AllAdminUsers].findIndex((userAccount) => {
-            return (userAccount.email === emailOrUsername || userAccount.username === emailOrUsername) && userAccount.password === password
-        })
 
-        const isSimpleUser =
-            [...AllSimpleUsersAccount].length > 0 ?
-                [...AllSimpleUsersAccount].findIndex((userAccount) => {
-                    return (userAccount.email === emailOrUsername || userAccount.username === emailOrUsername) && userAccount.password === password
+            const isAdmin = [...AllAdminUsers].findIndex((userAccount) => {
+                return (userAccount.email === emailOrUsername || userAccount.username === emailOrUsername) && userAccount.password === password
+            })
+
+            const isSimpleUser =
+                [...AllSimpleUsersAccount].length > 0 ?
+                    [...AllSimpleUsersAccount].findIndex((userAccount) => {
+                        return (userAccount.email === emailOrUsername || userAccount.username === emailOrUsername) && userAccount.password === password
+                    })
+                    :
+                    -1
+            if (isAdmin >= 0) {
+
+                dispatchLoginAsAdmin({
+                    idx: isAdmin
                 })
-                :
-                -1
-        if (isAdmin >= 0) {
 
-            dispatchLoginAsAdmin({
-                idx: isAdmin
-            })
+                changeUrl("/")
 
-            changeUrl("/")
+            } else if (isSimpleUser >= 0) {
 
-        } else if (isSimpleUser >= 0) {
-
-            dispatchLoginAsSimpleUser({
-                idx: isSimpleUser
-            })
-
-            changeUrl("/")
+                dispatchLoginAsSimpleUser({
+                    idx: isSimpleUser
+                })
 
 
-        } else {
-            console.log("pas inscrit");
+                changeUrl("/")
 
+
+            } else {
+                setClass("alert alert-danger")
+                setMessage("No registered account corresponds to this email/username and this password ")
+
+            }
+        }else{
+            setClass("alert alert-danger")
+            setMessage("Please enter your email/username and your password for login")
         }
+
 
 
     }
@@ -87,6 +101,9 @@ const SignIn = ({ AllAdminUsers, AllSimpleUsersAccount, dispatchLoginAsAdmin, di
                         />
                     </div>
                 </form>
+            </div>
+            <div className="row mb-4">
+                <p className={classAlert}>{message}</p>
             </div>
             <div className="row">
                 <div className="col col-sm col-md col-lg col-xl col-xxl">
