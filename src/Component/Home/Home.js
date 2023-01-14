@@ -5,6 +5,7 @@ import MerchandiseCardHome from "../MerchandiseComp/MerchandiseCardHome";
 import { VscCircleFilled } from "react-icons/vsc";
 import { connect } from "react-redux";
 import createFilter from "../../Redux/Actions/createFilter";
+import createViewFullList from "../../Redux/Actions/createViewFullList";
 
 const mapStateToProps = ({ AllProducts, AllCategories, isLoading }) => {
     return {
@@ -16,11 +17,12 @@ const mapStateToProps = ({ AllProducts, AllCategories, isLoading }) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchFilter: (payload) => dispatch(createFilter(payload))
+        dispatchFilter: (payload) => dispatch(createFilter(payload)),
+        dispatchViewFullList: (payload) => dispatch(createViewFullList(payload))
     };
 };
 
-const Home = ({ AllProducts, AllCategories, isLoading, dispatchFilter }) => {
+const Home = ({ AllProducts, AllCategories, isLoading, dispatchFilter, dispatchViewFullList }) => {
 
 
     const Filter = () => {
@@ -33,14 +35,18 @@ const Home = ({ AllProducts, AllCategories, isLoading, dispatchFilter }) => {
 
         const minPrice = Math.ceil(parseInt(document.getElementById("minPrice").value) / 655)
         const maxPrice = Math.ceil(parseInt(document.getElementById("maxPrice").value) / 655)
+        if (!Number.isNaN(minPrice) && !Number.isNaN(maxPrice)) {
 
-        dispatchFilter({
-            categories: [...AllcategoriesChecked],
-            minPrice: minPrice,
-            maxPrice: maxPrice
-        })
+            dispatchFilter({
+                categories: [...AllcategoriesChecked],
+                minPrice: minPrice,
+                maxPrice: maxPrice
+            })
+        }
 
     }
+
+
 
     return isLoading ? (
         <WaitingPage />
@@ -103,8 +109,13 @@ const Home = ({ AllProducts, AllCategories, isLoading, dispatchFilter }) => {
                         </span>
                     </div>
                     <br />
-                    <div className="d-flex justify-content-center">
+                    <div className="text-center">
                         <button className="btn btn-primary btn-sm" onClick={Filter}>Filter</button>
+
+                    </div>
+                    <div className="mt-3 text-center">
+
+                        <button className="btn btn-primary" onClick={() => dispatchViewFullList(null)}>View full product list</button>
                     </div>
                 </div>
                 <div className="container-fluid">

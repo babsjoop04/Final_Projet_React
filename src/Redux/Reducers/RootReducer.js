@@ -1,4 +1,4 @@
-import { GET_INITIAL_STATE, FILTER_All_PRODUCTS_BY_PRICE_CATEGORY, SEARCH, ADD_TO_CART, LOGIN_AS_ADMIN, LOG_OUT, CREATE_NEW_ACCOUNT, CHANGE_SIMPLE_ACCOUNT_INFO, CHANGE_ADMIN_ACCOUNT_INFO, DELETE_SIMPLE_ACCOUNT, DELETE_ADMIN_ACCOUNT, DELETE_TO_CARD, LOGIN_AS_SIMPLE_USER, COMMAND } from "../Constants/Constants";
+import { GET_INITIAL_STATE, FILTER_All_PRODUCTS_BY_PRICE_CATEGORY, SEARCH, ADD_TO_CART, LOGIN_AS_ADMIN, LOG_OUT, CREATE_NEW_ACCOUNT, CHANGE_SIMPLE_ACCOUNT_INFO, CHANGE_ADMIN_ACCOUNT_INFO, DELETE_SIMPLE_ACCOUNT, DELETE_ADMIN_ACCOUNT, DELETE_TO_CARD, LOGIN_AS_SIMPLE_USER, COMMAND, VIEW_FULL_PRODUCT_LIST } from "../Constants/Constants";
 
 
 const initialState = {
@@ -102,6 +102,20 @@ const RootReducer = ({ AllProducts, storage, AllCategories, AllAdminUsers, conne
 
             return {
                 AllProducts: [...result2],
+                storage: [...storage],
+                AllCategories: [...AllCategories],
+                AllAdminUsers: [...AllAdminUsers],
+                connectedUser: [...connectedUser],
+                AllSimpleUsersAccount: [...AllSimpleUsersAccount],
+                isLoading: isLoading,
+                userIsLoggedIn: userIsLoggedIn,
+                userIsAdmin: userIsAdmin,
+                userCart: [...userCart],
+                AllUserCart: [...AllUserCart],
+            }
+        case VIEW_FULL_PRODUCT_LIST:
+            return {
+                AllProducts: [...storage],
                 storage: [...storage],
                 AllCategories: [...AllCategories],
                 AllAdminUsers: [...AllAdminUsers],
