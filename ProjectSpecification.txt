@@ -12,13 +12,15 @@ A simple user can:
 *search for specific goods (by name, price, category)
 *create an account and log in to the app
 *edit account info
-*add goods to your order list
-*edit own order list
+*add/remove goods to your order list (basket)
+*order
 
 The administrator will be able to:
 *log in with username and password
 *access the dashboard
 *update the list of goods (adding new items and/or deleting)
+*see the list of registered accounts and modify it if necessary
+*see the list of orders made by users
 
 
 3.𝗧͟𝗲͟𝗰͟𝗵͟𝗻͟𝗼͟𝗹͟𝗼͟𝗴͟𝗶͟𝗲͟𝘀 𝘂͟𝘀͟𝗲͟𝗱͟:
@@ -30,7 +32,7 @@ The administrator will be able to:
 *React Icons for icons
 
 -API:
-*Platzi Fake Store API (product list and admin account)
+*Platzi Fake Store API (list of products and categories of product)
 
 - Management of HTTP requests:
 *Axios

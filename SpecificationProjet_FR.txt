@@ -12,14 +12,15 @@ Un utilisateur simple pourra :
 *rechercher une marchandise présise (par son nom,par son prix,par sa catégorie)
 *creer un compte et se connecter sur l'application 
 *modifier les infos de son compte
-*ajouter des biens à sa liste (panier) de commande
-*modifier sa liste de commande
+*ajouter/supprimer des biens à sa liste (panier) de commande
+*effectuer des commandes
 
 L'administrateur pourra:
 *se connecter avec son identifiant et son mot de passe
 *acceder au dashboard
 *mettre à jour la liste des marchandises (ajout de nouveaux éléments et/ou suppression )
-
+*voir la liste des comptes enregistrés et la modifier si besoin
+*voir la liste des commandes effectuée par les utilisateurs
 
 3.𝗧͟𝗲͟𝗰͟𝗵͟𝗻͟𝗼͟𝗹͟𝗼͟𝗴͟𝗶͟𝗲͟𝘀 𝘂͟𝘁͟𝗶͟𝗹͟𝗶͟𝘀͟é͟𝗲͟𝘀͟:
 
@@ -30,7 +31,7 @@ L'administrateur pourra:
 *React Icons pour les icones
 
 -API:
-*Platzi Fake Store API (liste des produits et administrateur)
+*Platzi Fake Store API (liste des produits et des categories de produit)
 
 -Gestion des requetes HTTP:
 *Axios
