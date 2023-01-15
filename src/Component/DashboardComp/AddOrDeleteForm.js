@@ -72,7 +72,7 @@ const AddOrDeleteForm = ({ AllCategories, dispatchDeleteOnlyOneProduct, dispatch
     }
 
     const DeleteAllProduct = () => {
-        
+
         if (document.getElementById("confirmCheckDeleteAll").checked) {
             const categoryTitle = document.getElementById("categoryTitle").value
             if (categoryTitle !== "") {
@@ -175,7 +175,7 @@ const AddOrDeleteForm = ({ AllCategories, dispatchDeleteOnlyOneProduct, dispatch
                             <textarea id="newProductDescription" className="form-control" rows="3" placeholder="description of product"></textarea>
                         </div>
                         <div className="input-group mb-3">
-                            <span className="input-group-text">Price</span>
+                            <span className="input-group-text">Price (F CFA)</span>
                             <input type="number" className="form-control" id="newProductPrice" min={0} />
                         </div>
                         <div className="input-group mb-3">
