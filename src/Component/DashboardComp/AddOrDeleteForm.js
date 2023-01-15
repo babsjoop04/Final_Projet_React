@@ -158,7 +158,7 @@ const AddOrDeleteForm = ({ AllCategories, dispatchDeleteOnlyOneProduct, dispatch
         }
     }
     return (
-        <div className='col-3 text-center'>
+        <div>
             {
                 wouldAdd ?
 

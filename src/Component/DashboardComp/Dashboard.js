@@ -33,8 +33,11 @@ const Dashboard = ({ storage, AllUserCart, AllSimpleUsersAccount, dispatchDelete
             <Header />
 
             <div className="container-fluid text-center mt-3 mb-5">
-                <div className="row mb-2">
-                    <div className="col-9">
+                <div className="row mb-5">
+                    <div className="col-sm col-lg-3 col-xl-3 col-xxl-3">
+                        <AddOrDeleteForm />
+                    </div>
+                    <div className=" col-sm col-lg col-xl col-xxl">
                         <h3>List of all products</h3>
                         <table className="table table-striped">
                             <thead>
@@ -64,15 +67,12 @@ const Dashboard = ({ storage, AllUserCart, AllSimpleUsersAccount, dispatchDelete
                                 }
                             </tbody>
                         </table>
-                        <div >
-
-                        </div>
                     </div>
-                    <AddOrDeleteForm />
+
 
                 </div>
-                <div className="row mb-2">
-                    <div className="col">
+                <div className="row mb-5">
+                    <div className="col-sm col-lg col-xl col-xxl">
                         <h3>All simple user account</h3>
                         <table className="table table-striped">
                             <thead>
@@ -111,7 +111,9 @@ const Dashboard = ({ storage, AllUserCart, AllSimpleUsersAccount, dispatchDelete
                                 }
                             </tbody>
                         </table>
-                        <div className="alert alert-danger">To delete an account do not forget to check the box in front of the delete button</div>
+                        <div className="alert alert-danger">
+                            <h6>To delete an account do not forget to check the box in front of the delete button</h6>
+                        </div>
                     </div>
                 </div>
                 <div className="row mb-2">
