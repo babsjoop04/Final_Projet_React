@@ -7,11 +7,13 @@ import { connect } from "react-redux";
 import createFilter from "../../Redux/Actions/createFilter";
 import createViewFullList from "../../Redux/Actions/createViewFullList";
 
-const mapStateToProps = ({ AllProducts, AllCategories, isLoading }) => {
+const mapStateToProps = ({ AllProducts, AllCategories, isLoading, userIsLoggedIn, connectedUser }) => {
     return {
         AllProducts: AllProducts,
         AllCategories: AllCategories,
         isLoading: isLoading,
+        userIsLoggedIn: userIsLoggedIn,
+        connectedUser: connectedUser
     };
 };
 
@@ -22,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-const Home = ({ AllProducts, AllCategories, isLoading, dispatchFilter, dispatchViewFullList }) => {
+const Home = ({ AllProducts, AllCategories, isLoading, dispatchFilter, dispatchViewFullList, userIsLoggedIn, connectedUser }) => {
 
 
     const Filter = () => {
@@ -116,11 +118,20 @@ const Home = ({ AllProducts, AllCategories, isLoading, dispatchFilter, dispatchV
 
                     </div>
                     <div className="mt-3 text-center">
-
                         <button className="btn btn-primary" onClick={() => dispatchViewFullList(null)}>View full product list</button>
                     </div>
                 </div>
                 <div className="container-fluid">
+                    {
+                        userIsLoggedIn &&
+                        <div className="mb-4 text-center">
+                            <h2 className="">
+                                Welcome back @{
+                                    [...connectedUser][0].username
+                                }
+                            </h2>
+                        </div>
+                    }
                     <div
                         className="row d-flex justify-content-around"
                         id="viewMarchandise"
@@ -141,8 +152,8 @@ const Home = ({ AllProducts, AllCategories, isLoading, dispatchFilter, dispatchV
                                 );
                             })
                             :
-                            <div className="col mt-5">
-                                <h3>no product corresponds to your search</h3>
+                            <div className="col mt-5 text-center">
+                                <h3>No product corresponds to your search</h3>
                             </div>
 
                         }
