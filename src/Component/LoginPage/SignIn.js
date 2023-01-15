@@ -29,11 +29,12 @@ const SignIn = ({ AllAdminUsers, AllSimpleUsersAccount, dispatchLoginAsAdmin, di
 
 
     const Login = () => {
+        // recovery of input data
         const emailOrUsername = document.getElementById("emailOrUsernameForLogin").value
         const password = document.getElementById("passwordForLogin").value
         if (emailOrUsername !== "" && password !== "") {
 
-
+            // check if user is already registered (if he is simple user or admin)
             const isAdmin = [...AllAdminUsers].findIndex((userAccount) => {
                 return (userAccount.email === emailOrUsername || userAccount.username === emailOrUsername) && userAccount.password === password
             })
@@ -45,6 +46,9 @@ const SignIn = ({ AllAdminUsers, AllSimpleUsersAccount, dispatchLoginAsAdmin, di
                     })
                     :
                     -1
+
+
+            // and treatment based on results
             if (isAdmin >= 0) {
 
                 dispatchLoginAsAdmin({
@@ -68,7 +72,7 @@ const SignIn = ({ AllAdminUsers, AllSimpleUsersAccount, dispatchLoginAsAdmin, di
                 setMessage("No registered account corresponds to this email/username and this password ")
 
             }
-        }else{
+        } else {
             setClass("alert alert-danger")
             setMessage("Please enter your email/username and your password for login")
         }

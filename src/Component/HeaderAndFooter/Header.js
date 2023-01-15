@@ -26,6 +26,7 @@ const Header = ({ userIsLoggedIn, userIsAdmin, dispatchSearch, dispathLogOut }) 
     const changeUrl = useNavigate()
 
     const Search = () => {
+        // research data recovery
         const searchInputValue = document.getElementById("searchInput").value
         if (searchInputValue !== "") {
 

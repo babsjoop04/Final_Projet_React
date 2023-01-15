@@ -29,7 +29,7 @@ MerchandiseCardHome.defaultProps = {
     id: Date.now(),
     title: "Iphone XR",
     price: 300000,
-    imageSrc: "/img/martin-pechy-bpg-ngqrPc8-unsplash.jpg",
+    imageSrc: "/img/DefaultProduct/xr0.jpg",
 };
 
 MerchandiseCardHome.propTypes = {
@@ -37,7 +37,7 @@ MerchandiseCardHome.propTypes = {
     title: PropTypes.string,
     price: PropTypes.number,
     imageSrc: PropTypes.string,
-    category:PropTypes.string
+    category: PropTypes.string
 };
 
 export default MerchandiseCardHome;

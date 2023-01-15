@@ -25,6 +25,8 @@ const AddOrDeleteForm = ({ AllCategories, dispatchDeleteOnlyOneProduct, dispatch
     const [wouldAdd, setWouldAdd] = useState(true)
     const [message, setMessage] = useState("Add new product ?")
 
+    // creation state var for message and its class in case 
+    // of error or success of the operation
     const [classAlert, setClassAlert] = useState("")
     const [messageAlert, setMessageAlert] = useState("")
 
@@ -39,6 +41,7 @@ const AddOrDeleteForm = ({ AllCategories, dispatchDeleteOnlyOneProduct, dispatch
 
         if (document.getElementById("confirmCheckDeleteOne").checked) {
 
+            // recovery of data entered
             const productTitle = document.getElementById("productTitle").value
             const productCategory = document.getElementById("productCategory").value
 
@@ -69,6 +72,7 @@ const AddOrDeleteForm = ({ AllCategories, dispatchDeleteOnlyOneProduct, dispatch
     }
 
     const DeleteAllProduct = () => {
+        
         if (document.getElementById("confirmCheckDeleteAll").checked) {
             const categoryTitle = document.getElementById("categoryTitle").value
             if (categoryTitle !== "") {
@@ -97,13 +101,15 @@ const AddOrDeleteForm = ({ AllCategories, dispatchDeleteOnlyOneProduct, dispatch
     }
 
     const AddNewProduct = () => {
+        // recovery of data entered
         const newProductTitle = document.getElementById("newProductTitle").value
         const newProductDescription = document.getElementById("newProductDescription").value
-        const newProductPrice = document.getElementById("newProductPrice").value
+        const newProductPrice = Math.ceil(parseInt(document.getElementById("newProductPrice").value) / 655)
         const newProductImage1 = document.getElementById("newProductImage1").value
         const newProductImage2 = document.getElementById("newProductImage2").value
         const categoriesTab = document.getElementsByName("categories")
         let productCategory
+
         // eslint-disable-next-line
         [...categoriesTab].map((category) => {
             if (category.checked)
@@ -166,7 +172,7 @@ const AddOrDeleteForm = ({ AllCategories, dispatchDeleteOnlyOneProduct, dispatch
                         </div>
                         <div className=" mb-3">
                             <span className="h6">Description :</span>
-                            <textarea id="newProductDescription" className="form-control" rows="3"></textarea>
+                            <textarea id="newProductDescription" className="form-control" rows="3" placeholder="description of product"></textarea>
                         </div>
                         <div className="input-group mb-3">
                             <span className="input-group-text">Price</span>
@@ -174,12 +180,12 @@ const AddOrDeleteForm = ({ AllCategories, dispatchDeleteOnlyOneProduct, dispatch
                         </div>
                         <div className="input-group mb-3">
                             <span className="input-group-text">Image 1 of product</span>
-                            <input type="text" className="form-control" id="newProductImage1" name="newProductImages" />
+                            <input type="text" className="form-control" id="newProductImage1" name="newProductImages" placeholder="enter the url of image 1 " />
 
                         </div>
                         <div className="input-group mb-3">
                             <span className="input-group-text">Image 2 of product</span>
-                            <input type="text" className="form-control" id="newProductImage2" name="newProductImages" />
+                            <input type="text" className="form-control" id="newProductImage2" name="newProductImages" placeholder="enter the url of image 2 " />
                         </div>
                         <h6>Product category </h6>
                         <div className="row">

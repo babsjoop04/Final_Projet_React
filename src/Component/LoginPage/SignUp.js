@@ -42,6 +42,7 @@ const SignUp = ({ AllAdminUsers, AllSimpleUsersAccount, dispatchCreateNewAccount
   }
 
   const createAccount = () => {
+    // recovery of input data
 
     const firstName = document.getElementById("firstName").value
     const lastName = document.getElementById("lastName").value

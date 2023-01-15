@@ -27,6 +27,7 @@ const Home = ({ AllProducts, AllCategories, isLoading, dispatchFilter, dispatchV
 
     const Filter = () => {
 
+        // research data recovery
         const AllcategoriesChecked = [...document.getElementsByName("categories")].filter((category) => category.checked)
 
         AllcategoriesChecked.forEach((category, idx) => {
