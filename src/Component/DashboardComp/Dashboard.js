@@ -119,8 +119,8 @@ const Dashboard = ({ storage, AllUserCart, AllSimpleUsersAccount, dispatchDelete
                 <div className="row mb-2">
                     <h3>List of all user commands</h3>
                     {
-                        [...AllUserCart].map((userCart) => {
-                            return <>
+                        [...AllUserCart].map((userCart, idx) => {
+                            return <div key={idx}>
                                 <h5>Username : @{userCart.user.username}</h5>
                                 {
                                     [...userCart.command].map((command, idx) => {
@@ -182,7 +182,7 @@ const Dashboard = ({ storage, AllUserCart, AllSimpleUsersAccount, dispatchDelete
                                     })
                                 }
 
-                            </>
+                            </div>
                         })
                     }
 

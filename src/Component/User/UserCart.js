@@ -37,6 +37,7 @@ const UserCart = ({ userCart, dispatchCommand, userIsLoggedIn, connectedUser, Al
     const [subtotal, setSub] = useState(0)
     const [shippingCost, setShippingCost] = useState(0)
     const [total, setTotal] = useState(0)
+    
     const [idxUser, setIdx] = useState(-1)
 
     useEffect(() => {
@@ -91,6 +92,7 @@ const UserCart = ({ userCart, dispatchCommand, userIsLoggedIn, connectedUser, Al
                 setMessage("You must log in to be able to order")
 
                 setTimeout(() => {
+                    // redirection to login page
                     changeUrl("/login")
                 }, 2000)
 
