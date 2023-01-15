@@ -37,7 +37,7 @@ const UserCart = ({ userCart, dispatchCommand, userIsLoggedIn, connectedUser, Al
     const [subtotal, setSub] = useState(0)
     const [shippingCost, setShippingCost] = useState(0)
     const [total, setTotal] = useState(0)
-    
+
     const [idxUser, setIdx] = useState(-1)
 
     useEffect(() => {
@@ -62,7 +62,7 @@ const UserCart = ({ userCart, dispatchCommand, userIsLoggedIn, connectedUser, Al
             -1
         setIdx(idx)
 
-    }, [AllUserCart, connectedUser])
+    }, [AllUserCart, connectedUser, userIsLoggedIn])
 
 
     const command = () => {
