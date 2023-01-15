@@ -38,6 +38,7 @@ const Home = ({ AllProducts, AllCategories, isLoading, dispatchFilter, dispatchV
         const maxPrice = Math.ceil(parseInt(document.getElementById("maxPrice").value) / 655)
         if (!Number.isNaN(minPrice) && !Number.isNaN(maxPrice)) {
 
+
             dispatchFilter({
                 categories: [...AllcategoriesChecked],
                 minPrice: minPrice,

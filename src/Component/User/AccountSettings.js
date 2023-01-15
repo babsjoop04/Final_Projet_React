@@ -170,131 +170,133 @@ const AccountSettings = ({ connectedUser, userIsAdmin, AllAdminUsers, dispatchCh
                     {
                         wouldChangeInfo ?
                             <div className="">
-                                <div className="row">
-                                    <div className="col col-sm col-md col-lg col-xl col-xxl">
-                                        <fieldset>
-                                            <legend>Personal info</legend>
-                                            <div className="input-group mb-3">
-                                                <span className="input-group-text">Your name</span>
-                                                &nbsp;&nbsp;
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="First Name"
-                                                    id="newFirstName"
-                                                    defaultValue={connectedUser[0].firstName}
-                                                />
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="Last Name"
-                                                    id="newLastName"
-                                                    defaultValue={connectedUser[0].lastName}
-                                                />
-                                            </div>
-
-                                            <div className="input-group mx-3  mb-3">
-                                                <span className=" mx-1">Change your gender :</span>
-                                                &nbsp;&nbsp;
-                                                <span className="form-check">
+                                <form action="" autoComplete="off">
+                                    <div className="row">
+                                        <div className="col col-sm col-md col-lg col-xl col-xxl">
+                                            <fieldset>
+                                                <legend>Personal info</legend>
+                                                <div className="input-group mb-3">
+                                                    <span className="input-group-text">Your name</span>
+                                                    &nbsp;&nbsp;
                                                     <input
-                                                        type="radio"
-                                                        className="form-check-input"
-                                                        name="gender"
-                                                        id="man"
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="First Name"
+                                                        id="newFirstName"
+                                                        defaultValue={connectedUser[0].firstName}
                                                     />
-                                                    <span className="form-check-label">Man</span>
-                                                </span>
-                                                <span className="form-check mx-3 ">
                                                     <input
-                                                        type="radio"
-                                                        className="form-check-input"
-                                                        name="gender"
-                                                        id="woman"
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="Last Name"
+                                                        id="newLastName"
+                                                        defaultValue={connectedUser[0].lastName}
                                                     />
-                                                    <span className="form-check-label">Woman</span>
-                                                </span>
-                                            </div>
-                                            <div className="input-group  mb-3">
-                                                <span className="input-group-text">Your birthdate :</span>
-                                                &nbsp;&nbsp;
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    name="newBirthDate"
-                                                    id="newBirthDate"
-                                                    defaultValue={connectedUser[0].birthDate}
-                                                />
-                                            </div>
-                                            <div className="input-group  mb-3">
-                                                <span className="input-group-text">Your address </span>
-                                                &nbsp;&nbsp;
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    name="address"
-                                                    id="newAddress"
-                                                    placeholder="your address or delivery address"
-                                                    defaultValue={connectedUser[0].address}
-                                                />
-                                            </div>
-                                        </fieldset>
+                                                </div>
+
+                                                <div className="input-group mx-3  mb-3">
+                                                    <span className=" mx-1">Change your gender :</span>
+                                                    &nbsp;&nbsp;
+                                                    <span className="form-check">
+                                                        <input
+                                                            type="radio"
+                                                            className="form-check-input"
+                                                            name="gender"
+                                                            id="man"
+                                                        />
+                                                        <span className="form-check-label">Man</span>
+                                                    </span>
+                                                    <span className="form-check mx-3 ">
+                                                        <input
+                                                            type="radio"
+                                                            className="form-check-input"
+                                                            name="gender"
+                                                            id="woman"
+                                                        />
+                                                        <span className="form-check-label">Woman</span>
+                                                    </span>
+                                                </div>
+                                                <div className="input-group  mb-3">
+                                                    <span className="input-group-text">Your birthdate :</span>
+                                                    &nbsp;&nbsp;
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        name="newBirthDate"
+                                                        id="newBirthDate"
+                                                        defaultValue={connectedUser[0].birthDate}
+                                                    />
+                                                </div>
+                                                <div className="input-group  mb-3">
+                                                    <span className="input-group-text">Your address </span>
+                                                    &nbsp;&nbsp;
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        name="address"
+                                                        id="newAddress"
+                                                        placeholder="your address or delivery address"
+                                                        defaultValue={connectedUser[0].address}
+                                                    />
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                        <div className="col col-sm col-md col-lg col-xl col-xxl">
+                                            <fieldset>
+                                                <legend>Login info</legend>
+                                                <div className="input-group mb-3">
+                                                    <span className="input-group-text">Your email</span>
+                                                    <input
+                                                        type="email"
+                                                        className="form-control"
+                                                        placeholder="example@example.com"
+                                                        id="newEmail"
+                                                        defaultValue={connectedUser[0].email}
+                                                    />
+                                                </div>
+
+                                                <div className="input-group mb-3">
+                                                    <span className="input-group-text">@</span>
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        placeholder="your username"
+                                                        id="newUsename"
+                                                        defaultValue={connectedUser[0].username}
+                                                    />
+                                                </div>
+
+                                                <div className="mt-4">
+                                                    <p>
+                                                        <em>
+                                                            NB : If you do not want to change your current
+                                                            password, leave the following 2 fields empty
+                                                        </em>
+                                                    </p>
+                                                </div>
+
+                                                <div className="input-group  mb-3">
+                                                    <span className="input-group-text">New password</span>
+                                                    <input
+                                                        type="password"
+                                                        className="form-control"
+                                                        name="newPassword"
+                                                        id="newPassword"
+                                                    />
+                                                </div>
+                                                <div className="input-group mb-3 ">
+                                                    <span className="input-group-text">Confirm password</span>
+                                                    <input
+                                                        type="password"
+                                                        className="form-control"
+                                                        name="newConfirmPassword"
+                                                        id="newConfirmPassword"
+                                                    />
+                                                </div>
+                                            </fieldset>
+                                        </div>
                                     </div>
-                                    <div className="col col-sm col-md col-lg col-xl col-xxl">
-                                        <fieldset>
-                                            <legend>Login info</legend>
-                                            <div className="input-group mb-3">
-                                                <span className="input-group-text">Your email</span>
-                                                <input
-                                                    type="email"
-                                                    className="form-control"
-                                                    placeholder="example@example.com"
-                                                    id="newEmail"
-                                                    defaultValue={connectedUser[0].email}
-                                                />
-                                            </div>
-
-                                            <div className="input-group mb-3">
-                                                <span className="input-group-text">@</span>
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="your username"
-                                                    id="newUsename"
-                                                    defaultValue={connectedUser[0].username}
-                                                />
-                                            </div>
-
-                                            <div className="mt-4">
-                                                <p>
-                                                    <em>
-                                                        NB : If you do not want to change your current
-                                                        password, leave the following 2 fields empty
-                                                    </em>
-                                                </p>
-                                            </div>
-
-                                            <div className="input-group  mb-3">
-                                                <span className="input-group-text">New password</span>
-                                                <input
-                                                    type="password"
-                                                    className="form-control"
-                                                    name="newPassword"
-                                                    id="newPassword"
-                                                />
-                                            </div>
-                                            <div className="input-group mb-3 ">
-                                                <span className="input-group-text">Confirm password</span>
-                                                <input
-                                                    type="password"
-                                                    className="form-control"
-                                                    name="newConfirmPassword"
-                                                    id="newConfirmPassword"
-                                                />
-                                            </div>
-                                        </fieldset>
-                                    </div>
-                                </div>
+                                </form>
 
                                 <div className="row">
                                     <div className="col col-sm col-md col-lg col-xl col-xxl">

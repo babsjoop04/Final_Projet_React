@@ -26,8 +26,10 @@ const RootReducer = ({ AllProducts, storage, AllCategories, AllAdminUsers, conne
         case FILTER_All_PRODUCTS_BY_PRICE_CATEGORY:
             //retrieve array of categories then filter
             const categoriesTable = [...payload.categories].length > 0 ? [...payload.categories] : [...AllCategories]
+
             const result = [...storage].filter((product) => {
-                const searchIdx = [...categoriesTable].findIndex((category) => category.name === product.category.name)
+                
+                const searchIdx = [...categoriesTable].findIndex((category) => category.toLowerCase() === product.category.name.toLowerCase())
                 if (searchIdx >= 0) {
                     return product.price >= payload.minPrice && product.price <= payload.maxPrice
                 } else

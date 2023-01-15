@@ -55,7 +55,10 @@ const UserCart = ({ userCart, dispatchCommand, userIsLoggedIn, connectedUser, Al
     useEffect(() => {
 
 
-        const idx = [...AllUserCart].findIndex((userCard) => userCard.user.username === connectedUser[0].username && userCard.user.email === connectedUser[0].email)
+        const idx = userIsLoggedIn ?
+            [...AllUserCart].findIndex((userCard) => userCard.user.username === connectedUser[0].username && userCard.user.email === connectedUser[0].email)
+            :
+            -1
         setIdx(idx)
 
     }, [AllUserCart, connectedUser])
