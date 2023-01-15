@@ -181,9 +181,9 @@ const UserCart = ({ userCart, dispatchCommand, userIsLoggedIn, connectedUser, Al
                                     [...AllUserCart].length > 0 && idxUser >= 0 ?
 
                                         [...[...AllUserCart][idxUser].command].map((command, idx) => {
-                                            return <>
-                                                <h5>Invoice N°{idx+1}</h5>
-                                                <table className="table table-hover" key={idx}>
+                                            return <div key={idx}>
+                                                <h5>Invoice N°{idx + 1}</h5>
+                                                <table className="table table-hover" >
                                                     <thead>
                                                         <tr>
                                                             <th>Product's title</th>
@@ -228,7 +228,7 @@ const UserCart = ({ userCart, dispatchCommand, userIsLoggedIn, connectedUser, Al
                                                     </tfoot>
                                                 </table>
 
-                                            </>
+                                            </div>
 
                                         })
 

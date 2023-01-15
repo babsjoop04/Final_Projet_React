@@ -90,7 +90,7 @@ const MerchandiseDesc = ({ storage, AllProducts, dispatchAddToCard }) => {
 
             <div
                 className="container-fluid text-center my-4"
-                id={`MerchandiseDesc-${[...storage][idx]}`}
+                id={`MerchandiseDesc-${idx}`}
             >
                 <div className="row">
                     <div className="col col-sm col-md col-lg col-xl col-xxl">
@@ -132,7 +132,7 @@ const MerchandiseDesc = ({ storage, AllProducts, dispatchAddToCard }) => {
                                     [...storage][idx].title
                                 }</h2>
                                 <p>
-                                    Brand : <strong className="h4">Undefined</strong>
+                                    Category : <strong className="h4">{[...storage][idx].category.name}</strong>
                                 </p>
                                 <p>
                                     Rating : <strong className="h4">4.8/5</strong>

@@ -2,6 +2,7 @@ import Home from "./Component/Home/Home";
 import LogInPage from "./Component/LoginPage/LogInPage";
 import MerchandiseDesc from "./Component/MerchandiseComp/MerchandiseDesc";
 import PrivateAccountSettings from "./Component/User/PrivateAccountSettings";
+import PrivateDashboard from "./Component/DashboardComp/PrivateDashboard";
 import UserCart from "./Component/User/UserCart";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
@@ -55,6 +56,8 @@ function App({ dispatchCreateInitialState }) {
           <Route path="/description-product/:category/:title" element={<MerchandiseDesc />} />
           <Route path="/account-settings" element={<PrivateAccountSettings />} />
           <Route path="/cart" element={<UserCart />} />
+          <Route path="/dashboard" element={<PrivateDashboard />} />
+
         </Routes>
       </BrowserRouter>
 
